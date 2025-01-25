@@ -4,6 +4,7 @@ import com.gaos.users.dto.AuthenticationDTO;
 import com.gaos.users.dto.RegisterDTO;
 import com.gaos.users.entities.User;
 import com.gaos.users.repositories.UserRepository;
+import com.gaos.users.services.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +24,9 @@ public class AuthenticationController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private TokenService tokenService;
+
+    @Autowired
     private UserRepository repository;
 
     @PostMapping("/login")
@@ -30,7 +34,8 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+        return ResponseEntity.ok(token);
     }
 
     @PostMapping("/register")

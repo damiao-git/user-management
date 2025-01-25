@@ -59,8 +59,16 @@ public class ClientController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Client> update(@PathVariable Long id, @RequestBody ClientDTO userUpdated) {
+    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody @Valid ClientDTO userUpdated, BindingResult result) {
         try {
+            if(!viaCepService.isValidCep(userUpdated.getAddress().getCep())){
+                return ResponseEntity.badRequest().body("Invalid CEP!");
+            }
+            if (result.hasErrors()) {
+                Map<String, String> errors = new HashMap<>();
+                result.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
+                return ResponseEntity.badRequest().body(errors);
+            }
             Client client = service.update(id, userUpdated);
             return ResponseEntity.ok(client);
         } catch (RuntimeException e) {
