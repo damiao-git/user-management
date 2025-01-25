@@ -1,8 +1,10 @@
 package com.gaos.users.controllers;
 
+import com.gaos.users.dto.AddressDTO;
 import com.gaos.users.dto.ClientDTO;
 import com.gaos.users.entities.Client;
 import com.gaos.users.services.ClientService;
+import com.gaos.users.services.ViaCepService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ public class ClientController {
     @Autowired
     private ClientService service;
 
+    @Autowired
+    private ViaCepService viaCepService;
+
     @GetMapping
     public List<Client> listAll() {
         return service.listAll();
@@ -32,8 +37,13 @@ public class ClientController {
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+
+
     @PostMapping
     public ResponseEntity<?> save(@RequestBody @Valid ClientDTO client, BindingResult result) {
+        if(!viaCepService.isValidCep(client.getAddress().getCep())){
+            return ResponseEntity.badRequest().body("Invalid CEP!");
+        }
         if (result.hasErrors()) {
             Map<String, String> errors = new HashMap<>();
             result.getFieldErrors().forEach(error -> errors.put(error.getField(), error.getDefaultMessage()));
