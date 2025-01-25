@@ -17,7 +17,10 @@ public class EmailService {
 
 
     public List<Email> listAll(){
-        return repository.findAll();
+
+        List<Email> emails = repository.findAll();
+        emails.forEach(email -> System.out.println("Email: " + email.getEmail()));
+        return emails;
     }
 
     public Optional<Email> findById(Long id){
