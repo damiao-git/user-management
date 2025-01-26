@@ -1,6 +1,5 @@
 package com.gaos.users.services;
 
-import com.gaos.users.entities.Address;
 import com.gaos.users.entities.Phone;
 import com.gaos.users.repositories.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;

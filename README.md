@@ -45,8 +45,9 @@ ou
 
 ## Configuração do Ambiente
 
-1. Certifique-se de que você tenha o **Java 17** instalado.
-2. Clone o repositório:
+Certifique-se de que você tenha o **Java 17** instalado.
+
+Clone o repositório:
    ```bash
    git clone https://github.com/damiao-git/user-management.git
    ```
@@ -57,6 +58,7 @@ Acesse o diretório do projeto:
 cd user-management
 ```
 Configure o banco de dados no arquivo application.properties:
+
 Exemplo do meu _application.properties_
 
 ```properties
@@ -102,7 +104,7 @@ Endpoints da API
 ```
 |Método  |  Endpoint        | Descrição                         | Permissão|
 |POST	 |  /auth/register  | Registra um novo usuário	        | Pública  |    
-|POST	 |  /auth/login	    | Autentica um usuário	            | Pública  |
+|POST	 |  /auth/login	    | Autentica um usuário	        | Pública  |
 |GET	 |  /api/users	    | Lista todos os usuários	        | ADMIN    |
 |PUT	 |  /api/users/{id} | Atualiza os dados de um usuário	| ADMIN    |
 |DELETE	 |  /api/users/{id} | Remove um usuário	                | ADMIN    |
@@ -113,12 +115,20 @@ Exemplo de Payload para Registro:
 POST /auth/register
 ```
 
-json
+json ADMIN
 ```
 {
   "username": "admin",
   "password": "admin123",
   "role": "ROLE_ADMIN"
+}
+```
+json USER
+```
+{
+  "username": "user",
+  "password": "user123",
+  "role": "ROLE_USER"
 }
 ```
 
@@ -153,6 +163,6 @@ Authorization: Bearer <seu_token>
 ### Considerações finais
 
 - Achei um tanto estranho consumir API no BackEnd, então fiz apenas o uso da validação do cep.
-- Tive dificuldade para validar quantidade de digitos para mobile.
+- Tive dificuldade para validar quantidade de digitos para mobile, pois nao queria retornar erro(400 ou 500).
 - Com mais tempo é possível inserir testes unitários e de implementação.
 - Uma tela para visualizar melhor as funcionalidades seria bem bacana, mas não tenho conhecimento em React, faria em Angular com mais tempo.

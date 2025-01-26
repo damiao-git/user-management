@@ -33,7 +33,6 @@ public class AddressDTO {
 
     private String complement;
 
-    // Construtor com todos os argumentos
     public AddressDTO(Long id, String street, String neighborhood, String city, String state, String cep, String complement) {
         this.id = id;
         this.street = street;
@@ -44,7 +43,6 @@ public class AddressDTO {
         this.complement = complement;
     }
 
-    // Construtor padrão
     public AddressDTO() {
     }
 

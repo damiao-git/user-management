@@ -1,6 +1,5 @@
 package com.gaos.users.controllers;
 
-import com.gaos.users.dto.AddressDTO;
 import com.gaos.users.dto.ClientDTO;
 import com.gaos.users.entities.Client;
 import com.gaos.users.services.ClientService;
