@@ -14,10 +14,10 @@ O **User Management** é um sistema de gerenciamento de usuários desenvolvido c
 
 - **Java 17**
 - **Spring Boot 3.0**
-- **Spring Security (JWT)** 
-- **Hibernate/JPA** 
-- **MySQL 8.0** 
-- **Maven** 
+- **Spring Security (JWT)**
+- **Hibernate/JPA**
+- **MySQL 8.0**
+- **Maven**
 
 ## Funcionalidades
 
@@ -29,7 +29,7 @@ O **User Management** é um sistema de gerenciamento de usuários desenvolvido c
 - Operações CRUD de usuários
 
 
-## Usuários cadastrados: 
+## Usuários cadastrados:
 
 O cadastro foi feito via Seeder usando a classe **DataSeeder**
 
@@ -87,13 +87,14 @@ O sistema estará disponível em:
 ```arduino
 http://localhost:8080
 ```
-Documentação Swagger disponivel em: 
+Documentação Swagger disponivel em:
 
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
 
-Para testes no Swagger:
+### Para testes no Swagger:
+Passos
 ```
 - 1º Passo: Acessar com usuário e senha disponibilizados mais acima.
 - 2º Passo: copiar Token de autorização e colar em authorize para efetuar o login.
@@ -110,6 +111,39 @@ Endpoints da API
 |DELETE	 |  /api/users/{id} | Remove um usuário	                | ADMIN    |
 ```
 
+Exemplo de Payload para Cadastrar Client
+
+```
+POST /api/client
+```
+json
+
+```
+{
+    "name": "Matias",
+    "cpf": "55555555555",
+    "address": {
+        "cep": "72910277",
+        "street": "aa",
+        "neighborhood": "nn",
+        "city": "cc",
+        "state": "ss",
+        "complement": ""
+    },
+    "phones": [
+        {
+            "type": "business",
+            "number": "12345678901"
+        }
+    ],
+    "emails": [
+        {
+            "email": "test@test.com"
+        }
+    ]
+}
+
+```
 Exemplo de Payload para Registro:
 ```
 POST /auth/register
